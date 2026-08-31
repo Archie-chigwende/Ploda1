@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: ploda-member-portal
+    runtime: docker
+    plan: 0.5c-512mb
+    region: frankfurt
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    numInstances: 1
+    domains:
+      - ploda.org
+    disk:
+      name: ploda-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PLODA_ENV
+        value: production
+      - key: BASE_URL
+        value: https://ploda.org
+      - key: PLODA_DB_PATH
+        value: /data/ploda.db
